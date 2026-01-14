@@ -1,0 +1,25 @@
+{
+  "name": "pixel-trader",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000P\u0000i\u0000x\u0000e\u0000l\u0000-\u0000t\u0000r\u0000a\u0000d\u0000e\u0000r\u0000-\u0000C\u0000e\u0000l\u0000l\u0000o\u0000u\u0000-\u0000C\u0000h\u0000r\u0000i\u0000s\u0000t\u0000i\u0000a\u0000n\u0000-\u0000C\u0000e\u0000s\u0000a\u0000r\u0000\r\u0000 \u0000",
+  "main": "stockclean.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bootcamp-PixelTrader-2025-2026/Pixel-trader-Cellou-Christian-Cesar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bootcamp-PixelTrader-2025-2026/Pixel-trader-Cellou-Christian-Cesar/issues"
+  },
+  "homepage": "https://github.com/Bootcamp-PixelTrader-2025-2026/Pixel-trader-Cellou-Christian-Cesar#readme",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0"
+  }
+}
