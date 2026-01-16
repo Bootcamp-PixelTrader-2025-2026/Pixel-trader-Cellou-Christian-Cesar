@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventaire Pixel Trader</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        
+        /* Style des cartes */
+        .card { 
+            background: #1e293b; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            border: 1px solid #334155; 
+            transition: 0.3s; 
+            text-align: center;
+            cursor: pointer;
+        }
+        .card:hover { border-color: #38bdf8; transform: translateY(-5px); }
+        .card img { width: 100%; height: 160px; object-fit: contain; background: #000; padding: 10px; }
+        
+        .p-4 { padding: 15px; text-align: left; }
+        .title { font-weight: bold; color: #38bdf8; margin-bottom: 5px; min-height: 2.5em; }
+        .price-tag { color: #fbbf24; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Stock Pixel Trader</h1>
+    
+
+    <div class="grid" id="inventory"></div>
+
+    <script>
+        // Liste des fichiers images
+        const images = [
+            "Alex_Kidd_in_Miracle_World_Logo.png", "Castlevania_symfony_of_the_night.png",
+            "Chrono_Trigger_Logo.png", "Crash_Bandicoot_Logo.png", "Crazy_Taxi_Logo.png",
+            "Donkey_Kong_Country_Logo.png", "Duck_Hunt_Logo.png", "Final_Fantasy_VII_Logo.png",
+            "GoldenEye_007_Logo.png", "Grand_Theft_Auto_Logo.png", "Half-life-logo.png",
+            "Halo_Combat_Evolved_Logo.png", "Mega_Man_2_Logo.png", "Metal_Gear_Solid_Logo.jpg",
+            "Pac-Man_Logo.png", "Portal_2_Logo.png", "Shenmue_Logo.png", "Sonic_the_Hedgehog_1991_logo.webp.png",
+            "SoulCalibur_Logo.png", "Spyro_the_Dragon_Logo.png", "Super_Mario_64.png",
+            "Super_Mario_Bros_3_Logo.png", "Tetris_Logo.png", "The_Last_of_Us_Logo.png",
+            "The_Legend_of_Zelda_Ocarina_of_Time_Logo.png"
+        ];
+
+        // Fonction pour afficher les détails au clic
+        function voirPlus(titre, annee, etat, lieu) {
+            alert("Détails du jeu :\n\n" + 
+                  "Titre : " + titre + "\n" +
+                  "Année : " + annee + "\n" +
+                  "État : " + etat + "\n" +
+                  "Lieu : " + lieu);
+        }
+
+        // Récupération des données
+        fetch('http://127.0.0.1:5000/jeux')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('inventory');
+                data.forEach(jeu => {
+                    // On cherche l'image correspondante
+                    let cherche = jeu.titre.toLowerCase().replace(/ /g, "_");
+                    let trouvé = images.find(f => f.toLowerCase().includes(cherche.substring(0, 10)));
+                    let imgPath = trouvé ? `static/${trouvé}` : `https://via.placeholder.com/150`;
+
+                    // Ajout de la carte avec l'événement clic
+                    container.innerHTML += `
+                        <div class="card" onclick="voirPlus('${jeu.titre.replace(/'/g, "\\'")}', '${jeu.annee_sortie}', '${jeu.etat}', '${jeu.emplacement}')">
+                            <img src="${imgPath}">
+                            <div class="p-4">
+                                <div class="title">${jeu.titre}</div>
+                                <div style="font-size: 0.8em; color: #94a3b8;">${jeu.plateforme_nom}</div>
+                                <span class="price-tag">${jeu.valeur_estimee}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+    </script>
+</body>
+</html>
